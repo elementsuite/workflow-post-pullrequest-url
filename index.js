@@ -17,7 +17,8 @@ if (!String.prototype.format) {
 try {
   const token = core.getInput('github-token');
   const url = core.getInput('url');
-  const auth = core.getInput('auth');
+  const authType = core.getInput('auth-type');
+  const authToken = core.getInput('auth-token');
   const client = new github.GitHub(token);
   const payload = github.context.payload;
   const title = payload.pull_request.title;
@@ -28,12 +29,14 @@ try {
   if (!id || isNaN(id)) {
     return;
   }
+  var formattedUrl = url.format(id, status);
   request({
-    url: url.format(id, status),
+    url: formattedUrl,
     headers: {
-      "Authorization": auth
+      "Authorization": '{0} {1}'.format(authType, authToken)
     }
   }, function(error, response, body) {
+    console.log('url', formattedUrl);
     console.log('request', body);
   });
 } catch (error) {
