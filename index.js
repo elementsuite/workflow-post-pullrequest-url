@@ -30,12 +30,14 @@ try {
     return;
   }
   var formattedUrl = url.format(id, status);
+  var formattedAuth = '{0} {1}'.format(authType, authToken);
   request({
     url: formattedUrl,
     headers: {
-      "Authorization": '{0} {1}'.format(authType, authToken)
+      "Authorization": formattedAuth
     }
   }, function(error, response, body) {
+    console.log('auth', formattedAuth);
     console.log('url', formattedUrl);
     console.log('request', body);
   });
