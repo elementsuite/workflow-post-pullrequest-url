@@ -1,0 +1,5 @@
+name: 'Pull Request Poster'
+description: 'An action to post pull request summary to a url'
+runs:
+  using: 'node12'
+  main: 'index.js'
