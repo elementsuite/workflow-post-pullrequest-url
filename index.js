@@ -21,6 +21,7 @@ try {
   const client = new github.GitHub(token);
   const payload = github.context.payload;
   const title = payload.pull_request.title;
+  const prNumber = payload.pull_request.number;
   const status = payload.action;
 
   var attributes = title.split('/');
@@ -29,7 +30,7 @@ try {
     return;
   }
   request({
-    url: url.format(id, status),
+    url: url.format(id, status, prNumber),
     headers: {
       "Authorization": auth
     }
