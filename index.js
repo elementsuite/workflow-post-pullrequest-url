@@ -25,6 +25,10 @@ try {
   const prNumber = payload.pull_request.number;
   const status = payload.action;
 
+  if (status === 'closed' && payload.pull_request.merged) {
+    status = 'merged'
+  }
+
   var attributes = title.split('/');
   var id = attributes[2];
   if (!id || isNaN(id)) {
