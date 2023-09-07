@@ -20,6 +20,7 @@ try {
   const auth = core.getInput('auth');
   const client = new github.GitHub(token);
   const payload = github.context.payload;
+  console.log('payload', payload);
   const title = payload.pull_request.title;
   const prNumber = payload.pull_request.number;
   const status = payload.action;
